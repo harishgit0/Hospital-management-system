@@ -1,0 +1,96 @@
+{% extends "base_patient.html" %}
+{% block title %}Book Appointment{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Book Appointment</h2>
+    <form method="POST">
+        <!-- Department -->
+        <div class="mb-3">
+            <label>Department</label>
+            <select id="department" class="form-control">
+                <option value="">Select Department</option>
+                {% for dept in departments %}
+                    <option value="{{ dept.department_id }}">{{ dept.department_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Doctor -->
+        <div class="mb-3">
+            <label>Doctor</label>
+            <select id="doctor" name="doctor" class="form-control">
+                <option value="">Select Doctor</option>
+                {% for doc in doctors %}
+                    <option value="{{ doc.doctor_id }}" data-dept="{{ doc.department_id }}">
+                        {{ doc.user.fname }} {{ doc.user.lname }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Date -->
+        <div class="mb-3">
+            <label>Date</label>
+            <input type="date" id="date" name="date" class="form-control">
+        </div>
+
+        <!-- Slots -->
+        <div class="mb-3">
+            <label>Available Slots</label>
+            <select id="slot" name="slot" class="form-control">
+                <option value="">Select a slot</option>
+            </select>
+        </div>
+
+        <!-- Reason -->
+        <div class="mb-3">
+            <label>Reason for Visit</label>
+            <textarea name="reason" class="form-control"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-success">Book Appointment</button>
+    </form>
+</div>
+
+<script>
+    const departmentSelect = document.getElementById("department");
+    const doctorSelect = document.getElementById("doctor");
+    const dateInput = document.getElementById("date");
+    const slotSelect = document.getElementById("slot");
+
+    // Filter doctors by department
+    departmentSelect.addEventListener("change", () => {
+        const deptId = departmentSelect.value;
+        for (let option of doctorSelect.options) {
+            if (!option.value) continue;
+            option.style.display = option.dataset.dept === deptId || deptId === "" ? "block" : "none";
+        }
+        doctorSelect.value = "";
+        slotSelect.innerHTML = '<option value="">Select a slot</option>';
+    });
+
+    // Fetch free slots when doctor or date changes
+    function fetchSlots() {
+        const doctorId = doctorSelect.value;
+        const date = dateInput.value;
+
+        if (!doctorId || !date) return;
+
+        fetch(`/patient/appointment/free_slots?doctor_id=${doctorId}&date=${date}`)
+            .then(res => res.json())
+            .then(data => {
+                slotSelect.innerHTML = '<option value="">Select a slot</option>';
+                data.slots.forEach(s => {
+                    const opt = document.createElement("option");
+                    opt.value = s.id;
+                    opt.textContent = s.time;
+                    slotSelect.appendChild(opt);
+                });
+            });
+    }
+
+    doctorSelect.addEventListener("change", fetchSlots);
+    dateInput.addEventListener("change", fetchSlots);
+</script>
+{% endblock %}

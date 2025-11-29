@@ -1,0 +1,25 @@
+{% extends "base_patient.html" %}
+{% block title %}Available Slots{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Available Slots for Dr. {{ doctor.user.fname }} {{ doctor.user.lname }}</h2>
+    
+    {% if free_slots %}
+        <div class="row mt-3">
+            {% for slot in free_slots %}
+                <div class="col-md-3 mb-3">
+                    <div class="card text-center shadow-sm">
+                        <div class="card-body">
+                            <p class="card-text">{{ slot.slot_time.strftime('%I:%M %p') }}</p>
+                            <a href="{{ url_for('patient_fix_appointment', doctor_id=doctor.doctor_id, slot_id=slot.slot_id) }}" class="btn btn-success btn-sm">Book</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-danger mt-3">No free slots available today. Please check another day.</p>
+    {% endif %}
+</div>
+{% endblock %}

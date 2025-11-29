@@ -1,0 +1,35 @@
+{% extends "base_doctor.html" %}
+
+{% block title %}Patient List{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+
+    <h2 class="mb-4">Patients</h2>
+
+    <div class="row">
+        {% for patient in patients %}
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100">
+
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">{{ patient.user.fname }} {{ patient.user.lname }}</h5>
+                </div>
+
+                <div class="card-body">
+                    <p class="card-text">
+                        {{ patient.medical_history }}
+                    </p>
+                    <a href="{{ url_for('doctor_appointment')}}" class="btn btn-outline-primary btn-sm mt-2">
+                        Fix appointment
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}

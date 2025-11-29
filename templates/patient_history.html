@@ -1,0 +1,34 @@
+{% extends "base_patient.html" %}
+
+{% block title %}Patient History{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Treatment History</h1>
+    
+    {% if appointments %}
+        {% for appointment in appointments %}
+            <div class="card mb-3 shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <strong>{{ appointment.appointment_datetime.strftime('%d %b %Y, %I:%M %p') }}</strong>
+                    <span class="float-end">Dr. {{ appointment.doctor.user.fname }} {{ appointment.doctor.user.lname }}</span>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Diagnosis</h5>
+                    <p class="card-text">{{ treatment.diagnosis }}</p>
+
+                    <h5 class="card-title">Prescription</h5>
+                    <p class="card-text">{{ treatment.prescription }}</p>
+
+                    <h5 class="card-title">Doctor Notes</h5>
+                    <p class="card-text">{{ treatment.doctor_notes }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="alert alert-info">
+            No treatment history found.
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

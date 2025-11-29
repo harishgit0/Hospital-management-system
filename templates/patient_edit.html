@@ -1,0 +1,61 @@
+{% extends "base_patient.html" %}
+
+{% block title %}Patient History{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+
+    <!-- Profile Card -->
+    <div class="card mb-4 shadow-sm profile-card p-4 text-center">
+        <div class="mb-3">
+            <i class="fa-solid fa-user fa-3x text-primary"></i>
+        </div>
+        <h2 class="fw-bold mb-3">{{ patient.user.fname }} {{ patient.user.lname }}</h2>
+        <div class="contact-details text-muted">
+            <p class="mb-1">📱 {{ patient.user.phone }}</p>
+            <p class="mb-1">📞 {{ patient.emergency_contact }}</p>
+            <p class="mb-1">✉️ {{ patient.user.email }}</p>
+            <p class="mb-0">🏠 {{ patient.user.address }}</p>
+        </div>
+    </div>
+
+    <!-- Overview Card -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Overview</h5>
+        </div>
+        <div class="card-body">
+            <div class="row text-center text-md-start">
+                <div class="col-md-3 col-6 mb-3">
+                    <strong>Gender:</strong> <span>{{ patient.gender }}</span>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <strong>Date of Birth:</strong> <span>{{ patient.date_of_birth }}</span>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <strong>Previous Visit:</strong> <span>{{ treatment.treatment_date }}</span>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <strong>Next Visit:</strong> <span>{{ treatment.follow_up_date }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="d-flex flex-wrap justify-content-center gap-3 mb-5">
+        <a href="{{ url_for('patient_appointment') }}" class="btn btn-outline-primary btn-lg flex-fill text-center">
+            <i class="fa-solid fa-calendar-check me-1"></i> Appointments
+        </a>
+        <a href="{{ url_for('patient_department') }}" class="btn btn-outline-info btn-lg flex-fill text-center">
+            <i class="fa-solid fa-user-doctor me-1"></i> Doctors
+        </a>
+        <a href="{{ url_for('patient_history') }}" class="btn btn-outline-success btn-lg flex-fill text-center">
+            <i class="fa-solid fa-file-medical me-1"></i> Treatment
+        </a>
+    </div>
+
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends "base_patient.html" %}
+
+{% block title %}Patient Appointment{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+
+    <!-- Header Section -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0">Your Appointments</h2>
+        <a href="{{ url_for('patient_fix_appointment') }}" class="btn btn-success">
+            <i class="fa-solid fa-plus"></i> Add Appointment
+        </a>
+    </div>
+
+    <!-- Appointments Table -->
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Appointment List</h5>
+        </div>
+
+        <div class="card-body p-0">
+            {% if patient.appointments %}
+            <div class="table-responsive">
+                <table class="table table-striped table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Date</th>
+                            <th>Doctor</th>
+                            <th>Time</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for appointment in patient.appointments %}
+                        <tr>
+                            <td>{{ appointment.appointment_datetime.strftime("%d %b %Y") }}</td>
+                            <td>{{ appointment.doctor.user.fname }} {{ appointment.doctor.user.lname }}</td>
+                            <td>{{ appointment.appointment_datetime.strftime("%I:%M %p") }}</td>
+                            <td class="text-center">
+
+                                <!-- Cancel -->
+                                <a href="{{url_for('delete_appointment', appointment_id=appointment.appointment_id)}}"
+                                   class="btn btn-sm btn-outline-danger me-1"
+                                   title="Cancel Appointment">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </a>
+
+                                <!-- Reschedule -->
+                                <a href="{{url_for('patient_reschedule', appointment_id=appointment.appointment_id)}}"
+                                    class="btn btn-sm btn-outline-info"
+                                    title="Reschedule Appointment">
+                                        <i class="fa-solid fa-pencil"></i>
+                                    </a>
+
+
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <p class="p-3 mb-0">You have no appointments scheduled.</p>
+            {% endif %}
+        </div>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends "base_admin.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<h1>Welcome to Admin Dashboard.</h1>
+
+<div id="PBleft">            
+    <div id="PBleftlink">
+        <a href="{{ url_for('admin_dashboard')}}" class="sidebar-link active"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+        <a href="{{url_for('admin_appointment')}}" class="sidebar-link"><i class="fa-regular fa-calendar-check"></i> All Appointments</a>
+        <a href="{{ url_for('admin_doctor')}}" class="sidebar-link"><i class="fa-solid fa-user-doctor"></i> Registered Doctors</a>
+        <a href="{{ url_for('admin_patient')}}" class="sidebar-link"><i class="fa-solid fa-hospital-user"></i> Registered Patients</a>
+    </div>            
+</div>
+<div id="ADcards">
+
+    <div id="ADpateint">
+
+        <!-- Total Patients Card -->
+        <div class="card" style="width: 22rem; height: 190px;">
+            <div class="card-body">
+                <h5 class="card-title" style="font-size: x-large;">Total Patients</h5>
+                <div class="stats-box">
+                    <h6 class="count">{{total_patients}}</h6>
+                    <i class="fa-regular fa-user patient-icon"></i>
+                </div>
+                <a href="{{ url_for('admin_patient')}}" class="btn btn-primary btn-sm mt-2">View Details</a>
+
+            </div>
+        </div>
+
+        <!-- Total Appointments Card -->
+        <div class="card" style="width: 22rem; height: 190px;">
+            <div class="card-body">
+                <h5 class="card-title" style="font-size: x-large;">Total Appointments</h5>
+                <div class="stats-box">
+                    <h6 class="count">{{total_appointments}}</h6>
+                    <i class="fa-regular fa-calendar-check patient-icon"></i>
+                </div>
+                <a href="{{ url_for('admin_appointment')}}" class="btn btn-primary btn-sm mt-2">View Details</a>
+
+            </div>
+        </div>
+
+    </div>
+    
+    
+        
+    <!-- Total Doctors Card -->
+        <div class="card" style="width: 21rem; height: 550px;">
+            <div class="card-body">
+                <h5 class="card-title" style="font-size: x-large;">Total Doctors</h5>
+                <div class="stats-box">
+                    <h6 class="count">{{total_doctors}}</h6>
+                    <i class="fa-solid fa-user-doctor patient-icon"></i>
+                </div>
+                
+                
+                <div id="ADlist" style="max-height: 370px; overflow-y: auto;">
+                    {% for doctor in doctors %}
+                        <p>{{ doctor.user.fname }} {{ doctor.user.lname }}</p>
+                    {% endfor %}
+                </div>
+                
+                <a href="{{url_for('admin_doctor')}}" class="btn btn-primary btn-sm mt-2">View Details</a>
+            </div>
+        </div>
+        
+</div>
+{% endblock %}

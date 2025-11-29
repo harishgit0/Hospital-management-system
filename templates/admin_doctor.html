@@ -1,0 +1,46 @@
+{% extends "base_admin.html" %}
+
+{% block title %}Doctors List{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Doctors</h1>
+    <a href="{{ url_for('admin_add_doctor')}}" class="btn btn-success">
+        <i class="fa-solid fa-plus"></i> Add Doctor
+    </a>
+</div>
+
+<div class="table-responsive shadow-sm rounded">
+    <table class="table table-striped table-hover table-bordered align-middle text-center mb-0">
+        <thead class="table-dark">
+            <tr>
+                <th>Name</th>
+                <th>Experience years</th>
+                <th>Qualification</th>
+                <th>Phone</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for doctor in doctors %}
+            <tr>
+                <td>{{ doctor.user.fname }} {{ doctor.user.lname }}</td>
+                <td>{{ doctor.experience_years }}</td>
+                <td>{{ doctor.qualification }}</td>
+                <td>{{ doctor.user.phone }}</td>
+                <td>
+                    <a href="#" class="btn btn-sm btn-primary me-1">
+                        <i class="fa-solid fa-eye"></i> Edit
+                    </a>
+                    <form action="{{ url_for('delete_doctor', doctor_id=doctor.doctor_id) }}" method="POST" style="display:inline-block;">
+                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this doctor?');">
+                                <i class="fa-solid fa-trash"></i> Delete
+                            </button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

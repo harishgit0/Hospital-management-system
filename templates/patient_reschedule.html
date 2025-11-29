@@ -1,0 +1,23 @@
+{% extends "base_patient.html" %}
+
+{% block title %}Reschedule Appointment{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h3>Reschedule Appointment</h3>
+    <form method="POST">
+        <div class="mb-3">
+            <label for="new_date" class="form-label">New Date</label>
+            <input type="date" class="form-control" id="new_date" name="new_date" 
+                   value="{{ appointment.appointment_datetime.strftime('%Y-%m-%d') }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="new_time" class="form-label">New Time</label>
+            <input type="time" class="form-control" id="new_time" name="new_time" 
+                   value="{{ appointment.appointment_datetime.strftime('%H:%M') }}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Reschedule</button>
+        <a href="{{ url_for('patient_appointment') }}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

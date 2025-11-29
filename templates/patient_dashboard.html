@@ -1,0 +1,86 @@
+{% extends "base_patient.html" %}
+
+{% block title %}Patient Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h3 class="mb-4">Welcome, {{ patient.user.fname }} {{ patient.user.lname }}</h3>
+
+    <div class="row">
+        <!-- Upcoming Appointments -->
+        <div class="col-md-8 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Upcoming Appointments</h5>
+                </div>
+                <div class="card-body p-0">
+                    {% if patient.appointments %}
+                    <div class="table-responsive">
+                        <table class="table table-striped mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Doctor</th>
+                                    <th>Time</th>
+                                    <th>Cancel</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for appointment in patient.appointments %}
+                                <tr>
+                                    <td>{{ appointment.appointment_datetime.strftime("%d %b %Y") }}</td>
+                                    <td>{{ appointment.doctor.user.fname }} {{ appointment.doctor.user.lname }}</td>
+                                    <td>{{ appointment.appointment_datetime.strftime("%I:%M %p") }}</td>
+                                    <td>
+                                        <a href="{{url_for('patient_appointment')}}" class="btn btn-sm btn-outline-danger" title="Cancel Appointment">
+                                            <i class="fa-solid fa-times"></i> Cancel
+                                        </a>
+
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <p class="p-3">No upcoming appointments.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Today's Appointment -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">Today's Appointment</h5>
+                </div>
+                <div class="card-body text-center">
+                    {% if patient.appointments %}
+                        <i class="fa-solid fa-user-doctor fa-3x mb-3 text-success"></i>
+                        <h5>Dr. {{ patient.appointments[0].doctor.user.fname }} {{ patient.appointments[0].doctor.user.lname }}</h5>
+                        <p class="mb-0">{{ patient.appointments[0].appointment_datetime.strftime("%I:%M %p") }}</p>
+                    {% else %}
+                        <p>No appointments today.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Departments Section -->
+    <div class="row">
+        {% for department in departments %}
+        <div class="col-md-4 mb-3">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ department.department_name }}</h5>
+                    <p class="card-text">{{ department.department_description }}</p>
+                    <a href="{{ url_for('patient_department') }}" class="btn btn-primary">View Doctors</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
