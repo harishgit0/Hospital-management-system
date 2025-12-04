@@ -1,0 +1,63 @@
+{% extends "base_doctor.html" %}
+{% block title %}Add Appointment{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Add Appointment</h2>
+
+    <form method="POST">
+
+        <!-- Patient Selection -->
+        <div class="mb-3">
+            <label class="form-label">Select Patient</label>
+            <select name="patient" class="form-control" required>
+                <option value="" disabled selected>-- Select Patient --</option>
+                {% for patient in patients %}
+                <option value="{{ patient.patient_id }}">
+                    {{ patient.user.fname }} {{ patient.user.lname }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Date Selection -->
+        <div class="mb-3">
+            <label class="form-label">Select Date</label>
+            <input type="date" class="form-control"
+                   name="date"
+                   id="datePicker"
+                   value="{{ selected_date }}"
+                   required>
+        </div>
+
+        <!-- Slot Selection -->
+        <div class="mb-3">
+            <label class="form-label">Available Slots</label>
+            <select name="slot" class="form-control" required>
+
+                {% if slots and slots|length > 0 %}
+                    {% for slot in slots %}
+                    <option value="{{ slot.slot_id }}">
+                        {{ slot.slot_time.strftime("%I:%M %p") }}
+                    </option>
+                    {% endfor %}
+                {% else %}
+                    <option disabled>No slots available for selected date</option>
+                {% endif %}
+
+            </select>
+        </div>
+
+        <!-- Reason for Visit -->
+        <div class="mb-3">
+            <label class="form-label">Reason for Visit</label>
+            <textarea name="reason" class="form-control" rows="3" required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Add Appointment</button>
+
+    </form>
+</div>
+
+{% endblock %}
