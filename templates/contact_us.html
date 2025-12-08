@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Hospital Management</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body class="contact-page">
+
+    <!-- NAVBAR (Same as homepage) -->
+    <div id="navbar">
+        <div id="Hleft-side">
+            <div class="Hlogo">
+                <img src="/static/images/Logo.png" alt="Logo">
+            </div>
+            <div id="Hname">
+                <i class="fa-solid fa-house-medical"></i> Hospital
+            </div>        
+        </div>
+
+        <div id="Hright-side">
+            <div id="H_nav_home">
+                <a href="{{ url_for('index')}}">Home</a>
+            </div>
+            <div id="H_nav_about">
+                <a href="{{ url_for('about_us')}}">About Us</a>
+            </div>
+            <div id="H_nav_contact">
+                <a href="{{ url_for('contact_us')}}">Contact Us</a>
+            </div>
+            <div id="H_nav_login">
+                <a href="{{ url_for('login')}}">Login</a>
+            </div>
+            <div id="H_nav_register">
+                <a href="{{ url_for('register')}}">Register</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTACT US SECTION -->
+    <section class="contact-section">
+        <div class="contact-container">
+
+            <h1>Contact Us</h1>
+            <p class="intro-text">
+                We are here to help you. Reach out to us anytime — our team will respond as soon as possible.
+            </p>
+
+            <div class="contact-grid">
+
+                <!-- CONTACT INFO -->
+                <div class="contact-info">
+                    <h2>Get in Touch</h2>
+
+                    <p><i class="fa-solid fa-phone"></i> +91-98765-43210</p>
+                    <p><i class="fa-solid fa-envelope"></i> support@hospital.com</p>
+                    <p><i class="fa-solid fa-location-dot"></i> Haryana, India</p>
+
+                    <div class="social-links">
+                        <a><i class="fa-brands fa-facebook"></i></a>
+                        <a><i class="fa-brands fa-instagram"></i></a>
+                        <a><i class="fa-brands fa-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <!-- CONTACT FORM -->
+                <div class="contact-form">
+                    <form action="{{ url_for('contact_us') }}" method="POST">
+                        <label>Name</label>
+                        <input type="text" placeholder="Enter your name" required>
+
+                        <label>Email</label>
+                        <input type="email" placeholder="Enter your email" required>
+
+                        <label>Message</label>
+                        <textarea rows="5" placeholder="Write your message here..." required></textarea>
+
+                        <button type="submit">Send Message</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER (Same as homepage) -->
+    <footer id="footer">
+        <div class="footer_content">
+
+            <div class="footer_about">
+                <h3>About Us</h3>
+                <p>We provide quality healthcare services with modern facilities and experienced staff.</p>
+            </div>
+
+            <div class="footer_links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="{{ url_for('index')}}">Home</a></li>
+                    <li><a href="{{ url_for('about_us')}}">About Us</a></li>
+                    <li><a href="{{ url_for('contact_us')}}">Contact Us</a></li>
+                    <li><a href="{{ url_for('login')}}">Login</a></li>
+                    <li><a href="{{ url_for('register')}}">Register</a></li>
+                </ul>
+            </div>
+
+            <div class="footer_contact">
+                <h3>Contact Info</h3>
+                <p><i class="fa-solid fa-phone"></i> +91-98765-43210</p>
+                <p><i class="fa-solid fa-envelope"></i> 24f3003067@ds.study.iitm.ac.in</p>
+                <p><i class="fa-solid fa-location-dot"></i> Haryana, India</p>
+            </div>
+        </div>
+
+        <div class="footer_bottom">
+            <p>© 2025 Hospital Management System. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

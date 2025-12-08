@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Hospital Management</title>
+
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <div id="navbar">
+        <div id="Hleft-side">
+            <div class="Hlogo">
+                <img src="/static/images/Logo.png" alt="Logo">
+            </div>
+            <div id="Hname">
+                <i class="fa-solid fa-house-medical"></i>
+                Hospital
+            </div>        
+        </div>
+
+        <div id="Hright-side">
+            <div id="H_nav_home">
+                <a href="{{ url_for('index')}}">Home</a>
+            </div>
+            <div id="H_nav_about">
+                <a href="{{ url_for('about_us')}}">About Us</a>
+            </div>
+            <div id="H_nav_contact">
+                <a href="#">Contact Us</a>
+            </div>
+            <div id="H_nav_login">
+                <a href="{{ url_for('login')}}">Login</a>
+            </div>
+            <div id="H_nav_register">
+                <a href="{{ url_for('register')}}">Register</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- BANNER -->
+    <div class="about-banner">
+        <h1>About Our Hospital System</h1>
+        <p>Your health, our priority — managed with modern digital care.</p>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="info-wrapper">
+
+        <div class="info-card">
+            <h3>Who We Are</h3>
+            <p>
+                Our Hospital Management System is built to streamline healthcare operations with 
+                efficiency and accuracy. We offer a digital platform that simplifies patient care,
+                hospital administration, and medical workflow.
+            </p>
+        </div>
+
+        <div class="info-card">
+            <h3>Our Vision</h3>
+            <p>
+                To build a secure, fast, and modern digital healthcare system where technology 
+                improves patient experience and staff productivity.
+            </p>
+        </div>
+
+        <div class="info-card">
+            <h3>Our Mission</h3>
+            <p>
+                To provide hospitals with a reliable, user-friendly management solution that reduces 
+                human error, speeds up operations, and enhances medical service quality.
+            </p>
+        </div>
+
+        <div class="info-card">
+            <h3>What We Offer</h3>
+            <ul>
+                <li>Online Appointment Booking</li>
+                <li>Doctor & Patient Dashboards</li>
+                <li>Digital Medical Records</li>
+                <li>Treatment History Logs</li>
+                <li>Secure Login & Authentication</li>
+                <li>Admin Control Panel</li>
+                <li>Automated Workflow Management</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer id="footer">
+        <div class="footer_content">
+            <div class="footer_about">
+                <h3>About Us</h3>
+                <p>We provide quality healthcare services with modern facilities and experienced staff to ensure your well-being.</p>
+            </div>
+
+            <div class="footer_links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="{{ url_for('index')}}">Home</a></li>
+                    <li><a href="{{ url_for('about_us')}}">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="{{ url_for('login')}}">Login</a></li>
+                    <li><a href="{{ url_for('register')}}">Register</a></li>
+                </ul>
+            </div>
+
+            <div class="footer_contact">
+                <h3>Contact Info</h3>
+                <p><i class="fa-solid fa-phone"></i> +91-98765-43210</p>
+                <p><i class="fa-solid fa-envelope"></i> 24f3003067@ds.study.iitm.ac.in</p>
+                <p><i class="fa-solid fa-location-dot"></i> Haryana, India</p>
+            </div>
+        </div>
+
+        <div class="footer_bottom">
+            <p>© 2025 Hospital Management System. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

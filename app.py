@@ -153,6 +153,26 @@ def ensure_logged_in(role=None):
 def index():
     return render_template('index.html')
 
+@app.route('/about_us')
+def about_us():
+    return render_template('about_us.html')
+
+@app.route('/contact_us', methods=['GET', 'POST'])
+def contact_us():
+    if request.method == 'POST':
+        name = request.form.get('name')
+        email = request.form.get('email')
+        message = request.form.get('message')
+
+        print("New message received:", name, email, message)
+
+        # You can later save to DB or send email here
+
+        flash("Message sent successfully!", "success")
+        return redirect(url_for('contact_us'))
+
+    return render_template('contact_us.html')
+
 
 # -----------------------------
 # Auth
