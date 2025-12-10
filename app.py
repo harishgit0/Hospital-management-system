@@ -56,6 +56,13 @@ class Patients(db.Model):
     medical_history = db.Column(db.String(500), nullable=False)
 
     medical_history_entries = db.relationship('MedicalHistory', backref='patient', lazy=True)
+    appointments = db.relationship(
+        'Appointments',
+        backref='patient',
+        cascade="all, delete-orphan",
+        passive_deletes=True
+    )
+    
 
 
 class MedicalHistory(db.Model):
@@ -82,6 +89,13 @@ class Doctors(db.Model):
     experience_years = db.Column(db.Integer, nullable=False)
     consultation_fee = db.Column(db.Float, nullable=False)
     bio = db.Column(db.String(500))
+    appointments = db.relationship(
+        'Appointments',
+        backref='doctor',
+        cascade="all, delete-orphan",
+        passive_deletes=True
+    )
+
 
 
 class Appointments(db.Model):
@@ -98,8 +112,6 @@ class Appointments(db.Model):
         backref="appointment",
         cascade="all, delete-orphan"
     )
-    patient = db.relationship('Patients', backref='appointments', lazy=True)
-    doctor = db.relationship('Doctors', backref='appointments', lazy=True)
 
 
 class Treatments(db.Model):
